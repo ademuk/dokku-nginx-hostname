@@ -1,7 +1,7 @@
 dokku-nginx-hostname
 ========================
 
-Cstom app hostnames for dokku (https://github.com/progrium/dokku).
+Custom app hostnames for dokku (https://github.com/progrium/dokku).
 
 Requirements
 ------------
