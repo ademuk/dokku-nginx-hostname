@@ -5,11 +5,8 @@ APP="$1"
 HOSTNAME_FILE="HOSTNAME"
 HOSTNAME_FILE_PATH="$DOKKU_ROOT/$APP/$HOSTNAME_FILE"
 
-if [[ -f "$HOSTNAME_FILE_PATH" ]]; then
-  while read line
-  do
-    output="$output -p $line"
-  done < $HOSTNAME_FILE_PATH
+if [[ -f "$HOSTNAME_FILE_PATH" ]] ; then
+  output=$(head -n 1 $HOSTNAME_FILE_PATH)
 
   echo "$(cat)$output"
 fi
