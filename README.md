@@ -19,17 +19,17 @@ $ sudo git clone https://github.com/ademuk/dokku-nginx-hostname.git nginx-hostna
 Usage
 -----
 
-In your applications folder (/home/dokku/app_name) create a file called HOSTNAME.
-
-Inside this file list one or more hostnames. For example:
-
+To set hostname
 ```bash
-example.com
+
+dokku hostname:set app_name example.com
 ```
-or
+To retrieve hostname
 ```bash
-example.com example.net
+dokku hostname app_name
 ```
+
+NOTE: Currently you must re-deploy your app to apply the hostname change.
 
 License
 -------
