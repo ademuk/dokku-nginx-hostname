@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+# Check if name is specified
+if [[ $1 == hostname ]] || [[ $1 == hostname:* ]]; then
+  if [[ -z $2 ]]; then
+    echo "You must specify an app name"
+    exit 1
+  else
+    APP="$2"
+    HOSTNAME_FILE="$DOKKU_ROOT/$APP/HOSTNAME"
+
+    # Check if app exists with the same name
+    if [ ! -d "$DOKKU_ROOT/$APP" ]; then
+      echo "App $APP does not exist"
+      exit 1
+    fi
+
+    [ -f $HOSTNAME_FILE ] || {
+      echo "-----> Creating $HOSTNAME_FILE"
+      touch $HOSTNAME_FILE
+    }
+  fi
+fi
+
+case "$1" in
+
+  hostname)
+      cat $HOSTNAME_FILE
+    ;;
+
+  hostname:set)
+    if [[ -z "${*:3}" ]]; then
+      echo "Usage: dokku hostname:set APP DOMAIN1 [DOMAIN2 ...]"
+      echo "Must specify a DOMAIN."
+      exit 1
+    fi
+
+    hostname="${*:3}"
+
+    echo "$hostname" > $HOSTNAME_FILE
+
+    ;;
+
+  help)
+    cat && cat<<EOF
+    hostname <app>                                   display the hostnames for an app
+    hostname:set <app> DOMAIN1 [DOMAIN2 ...]         set one or more hostnames
+EOF
+    ;;
+esac
