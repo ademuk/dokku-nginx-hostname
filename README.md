@@ -6,7 +6,7 @@ Custom app hostnames for dokku (https://github.com/progrium/dokku).
 Requirements
 ------------
 
-Tested on vesrion 0.3.7 of Dokku.
+Tested on version 0.3.7 of Dokku.
 
 Installation
 ------------
